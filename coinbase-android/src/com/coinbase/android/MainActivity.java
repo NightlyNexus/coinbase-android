@@ -214,6 +214,7 @@ public class MainActivity extends CoinbaseActivity implements AccountsFragment.P
           updateTitle();
           updateBackButton();
           lastTimeIndex = mViewFlipper.getDisplayedChild();
+          closeKeyboard();
         }
 
       };
@@ -595,6 +596,14 @@ public class MainActivity extends CoinbaseActivity implements AccountsFragment.P
               mViewFlipper.getDisplayedChild() != FRAGMENT_INDEX_POINT_OF_SALE);
     } else {
       getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    }
+  }
+
+  private void closeKeyboard() {
+    InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+    View v = this.getCurrentFocus();
+    if (v != null) {
+      inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
     }
   }
 
